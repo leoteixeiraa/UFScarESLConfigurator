@@ -1,0 +1,38 @@
+<form [formGroup]="featureForm">
+  <div *ngFor="let question of questions">
+    <div *ngIf="!question.dependsOn || featureForm.get(question.dependsOn)?.value === question.condition">
+
+      <mat-checkbox class="example-margin" *ngIf="!question.singleOption"
+                    [checked]="allSelected(question)"
+                    [indeterminate]="someSelected(question)"
+                    (change)="setAll(question, $event.checked)">
+        {{question.label}}
+      </mat-checkbox>
+
+      <section class="example-section" *ngIf="!question.singleOption; else singleOptionTemplate">
+        <span class="example-list-section">
+          <ul>
+            <li *ngFor="let option of question.options">
+              <mat-checkbox [formControlName]="option.value"
+                            (change)="updateParentCheckbox(question)">
+                {{option.display}}
+              </mat-checkbox>
+            </li>
+          </ul>
+        </span>
+      </section>
+
+      <ng-template #singleOptionTemplate>
+        <section class="example-section">
+          <mat-radio-group [formControlName]="question.key">
+            <label>{{question.label}}</label>
+            <div *ngFor="let option of question.options">
+              <mat-radio-button [value]="option.value">{{option.display}}</mat-radio-button>
+            </div>
+          </mat-radio-group>
+        </section>
+      </ng-template>
+
+    </div>
+  </div>
+</form>
