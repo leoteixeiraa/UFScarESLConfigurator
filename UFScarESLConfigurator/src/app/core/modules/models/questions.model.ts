@@ -4,7 +4,7 @@ export interface Question {
   options?: Option[];
   subquestions?: Question[];
   dependsOn?: string;
-  condition?: any;
+  condition?: any[];
   singleOption?: boolean;
 }
 

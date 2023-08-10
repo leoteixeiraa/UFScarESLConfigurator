@@ -10,12 +10,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { SideNavComponent } from './shared/components/side-nav/side-nav.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    FeatureFormComponent
+    FeatureFormComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,10 @@ import { MatRadioModule } from '@angular/material/radio';
     ReactiveFormsModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSidenavModule,
+    MatListModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

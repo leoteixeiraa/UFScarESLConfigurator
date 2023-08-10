@@ -1,21 +1,52 @@
-// Cores Globais
-$color-laranja: #eaa159
-$color-azul-escuro: #08305D
-$color-branco: #ffffff
-$color-bege: #f0bb86
-$color-laranja-claro: #e4872c
-$color-azul: #304D74
+@import '_variables.sass'
 
-// Configuração geral do corpo
 body
-  font-family: 'Arial', sans-serif // Escolha a fonte que você preferir
-  background-color: $color-azul-escuro
-  color: $color-branco
+  font-family: 'Arial', sans-serif
+  background-color: $color-black
+  color: $color-azul-escuro
 
-// Logo configurações
+h1, h2, h3, h4, h5
+  color: $color-laranja
+
 .logo
   background-color: $color-azul
+
   .titulo
     color: $color-branco
+
   .icone
     color: $color-laranja
+
+.mat-sidenav
+  background-color: $color-azul !important
+  color: $color-branco !important
+  width: 250px
+
+  .mat-icon
+    color: $color-laranja !important
+
+.mat-sidenav-container, .mat-sidenav-content
+  background-color: $color-branco !important
+
+.mat-sidenav-container
+  height: 100vh
+
+.full-height
+  height: 100vh
+
+.mat-sidenav-content
+  background-color: $color-branco !important
+  flex: 1
+  overflow-y: auto
+
+.mat-checkbox
+  color: black
+
+  &.mat-checkbox-checked .mat-checkbox-background, &.mat-checkbox-indeterminate .mat-checkbox-background
+    background-color: black
+
+form .mat-checkbox
+  color: black
+
+  &.mat-checkbox-checked .mat-checkbox-background, &.mat-checkbox-indeterminate .mat-checkbox-background
+    background-color: black
