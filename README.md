@@ -2,7 +2,7 @@
 
 ## Descrição
 
-**UFScar ESL Configurator** é um aplicativo desenvolvido para facilitar a geração e configuração de features de Etiquetas Eletrônicas (ESL). Criado e desenvolvido como parte do projeto de mestrado na UFScar, este aplicativo se destaca por sua interface intuitiva e pela capacidade de gerar configurações personalizadas em formato XML para integração com sistemas de ESL.
+**UFScar ESL Configurator** é um aplicativo desenvolvido para facilitar a geração e configuração de features de Etiquetas Eletrônicas (ESL). Criado e desenvolvido como parte do projeto de mestrado na UFScar, este aplicativo se destaca por sua interface intuitiva e pela capacidade de gerar configurações personalizadas em formato JSON para integração com sistemas de ESL.
 
 **Aluno de Mestrado:** Leonardo Teixeira  
 **Orientador:** Prof Dr. Valter Vieira Camargo
@@ -17,16 +17,12 @@
 - As escolhas do usuário direcionam quais campos e opções são apresentados, proporcionando uma experiência personalizada.
 
 **Visualização do Diagrama:**
-- Integração com bibliotecas renomadas como `ngx-charts` ou `D3.js` para exibir uma representação visual clara e interativa das seleções do usuário.
-
-**Exportação do XML:**
-- Botão de ação "Gerar XML" para exportação imediata do código XML configurado com base nas seleções do usuário.
+- Integração com bibliotecas para exibir uma representação visual de diagramas de classes a partir das seleções do usuário.
 
 ### Serviços:
 
 **Service de Formulário:** Encarregado de toda a lógica de funcionamento e manipulação do formulário.  
 **Service de Diagrama:** Administra as interações e apresentação gráfica com a biblioteca de diagrama escolhida.  
-**Service de Exportação:** Gera o código XML a partir das escolhas do usuário no formulário.
 
 ### Modelos (Models):
 
