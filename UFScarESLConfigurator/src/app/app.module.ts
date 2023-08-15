@@ -10,17 +10,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
-import { SideNavComponent } from './shared/components/side-nav/side-nav.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
-import {MatCardModule} from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import {MatMenuModule} from '@angular/material/menu';
+import { TopMenuComponent } from './shared/components/top-menu/top-menu.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FeatureFormComponent,
-    SideNavComponent
+    TopMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,11 +32,15 @@ import {MatCardModule} from '@angular/material/card';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatToolbarModule,
+    MatMenuModule,
     MatCheckboxModule,
     MatRadioModule,
     MatSidenavModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
