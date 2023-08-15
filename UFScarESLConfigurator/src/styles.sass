@@ -11,42 +11,27 @@ h1, h2, h3, h4, h5
 .logo
   background-color: $color-azul
 
-  .titulo
+  &__titulo
     color: $color-branco
 
-  .icone
+  &__icone
     color: $color-laranja
 
 .mat-sidenav
-  background-color: $color-azul !important
-  color: $color-branco !important
+  background-color: $color-azul
+  color: $color-branco
   width: 250px
 
   .mat-icon
-    color: $color-laranja !important
-
-.mat-sidenav-container, .mat-sidenav-content
-  background-color: $color-branco !important
-
-.mat-sidenav-container
-  height: 100vh
+    color: $color-laranja
 
 .full-height
   height: 100vh
 
 .mat-sidenav-content
-  background-color: $color-branco !important
   flex: 1
   overflow-y: auto
 
-.mat-checkbox
-  color: black
-
-  &.mat-checkbox-checked .mat-checkbox-background, &.mat-checkbox-indeterminate .mat-checkbox-background
-    background-color: black
-
-form .mat-checkbox
-  color: black
-
-  &.mat-checkbox-checked .mat-checkbox-background, &.mat-checkbox-indeterminate .mat-checkbox-background
-    background-color: black
+@media (max-width: 768px)
+  .mat-sidenav
+    width: 100%

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SideNavComponent } from './side-nav.component';
+import { TopMenuComponent } from './top-menu.component';
 
-describe('SideNavComponent', () => {
-  let component: SideNavComponent;
-  let fixture: ComponentFixture<SideNavComponent>;
+describe('TopMenuComponent', () => {
+  let component: TopMenuComponent;
+  let fixture: ComponentFixture<TopMenuComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SideNavComponent]
+      declarations: [TopMenuComponent]
     });
-    fixture = TestBed.createComponent(SideNavComponent);
+    fixture = TestBed.createComponent(TopMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

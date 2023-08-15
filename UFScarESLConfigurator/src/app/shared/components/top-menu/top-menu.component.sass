@@ -1,0 +1,31 @@
+@import '../../../../_variables.sass'
+
+.mat-toolbar
+  position: static
+  top: 0
+  width: 100%
+  z-index: 1000
+  background-color: $color-azul-escuro
+  padding: 10px 20px
+  display: flex  // garante que os itens dentro sejam tratados como itens flexíveis
+  align-items: center  // centraliza verticalmente os itens
+  margin-left: inherit
+
+  .logo
+    width: 191px
+    height: 43px
+    background-image: url('../../../../assets/img/logo-oficial.png')
+    background-size: contain
+    background-position: center  // centraliza a imagem de fundo
+    background-repeat: no-repeat
+    margin-right: 20px
+    flex-shrink: 0  // impede que o logo encolha se a barra de ferramentas ficar muito pequena
+
+  button
+    // margin-left: auto  // alinha o botão à direita. Se você não quer isso, remova ou ajuste
+
+.mat-menu
+  color: $color-azul-escuro
+
+  button
+    color: $color-laranja
