@@ -1,12 +1,12 @@
   import { Injectable } from '@angular/core';
-  import { Question } from '../modules/models/questions.model';
+import { Feature } from '../modules/models/features.model';
 
   @Injectable({
     providedIn: 'root'
   })
-  export class QuestionsService {
+  export class FeaturesService {
 
-    private questions: Question[] = [
+    private features: Feature[] = [
       {
         key: 'platform',
         label: 'Qual plataforma?',
@@ -122,7 +122,7 @@
 
     ];
 
-    getQuestions() {
-      return this.questions;
+    getFeatures() {
+      return this.features;
     }
   }

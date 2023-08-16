@@ -1,8 +1,8 @@
-export interface Question {
+export interface Feature {
   key: string;
   label: string;
   options?: Option[];
-  subquestions?: Question[];
+  subfeatures?: Feature[];
   dependsOn?: string;
   condition?: any[];
   singleOption?: boolean;

@@ -1,0 +1,33 @@
+<mat-stepper #stepper>
+
+  <!-- Etapa 1: Escolha as features -->
+  <mat-step [stepControl]="featureForm">
+    <form [formGroup]="featureForm">
+      <ng-template matStepLabel>Feature Selection</ng-template>
+      <ng-content select="[step1]"></ng-content>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Etapa 2: Diagrama Viewer -->
+  <mat-step>
+    <ng-template matStepLabel>View Diagram</ng-template>
+    <ng-content select="[step2]"></ng-content>
+    <div>
+      <button mat-button matStepperPrevious>Previous</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
+  <!-- Etapa 3: Etapa de Código Fonte -->
+  <mat-step>
+    <ng-template matStepLabel>Generated Code</ng-template>
+    <ng-content select="[step3]"></ng-content>
+    <div>
+      <button mat-button matStepperPrevious>Previous</button>
+    </div>
+  </mat-step>
+
+</mat-stepper>
