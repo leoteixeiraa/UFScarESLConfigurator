@@ -1,22 +1,24 @@
-  <section>
+
+
+ <section>
     <h3>Escolha as suas features</h3>
   <form [formGroup]="featureForm">
-    <div *ngFor="let question of questions">
+    <div *ngFor="let feature of features">
 
       <!-- Usando a função 'shouldDisplayQuestion' para verificar se a questão deve ser exibida -->
-      <div *ngIf="shouldDisplayQuestion(question)">
+      <div *ngIf="shouldDisplayQuestion(feature)">
 
-        <mat-checkbox class="example-margin" *ngIf="!question.singleOption" [checked]="allSelected(question)"
-          [indeterminate]="someSelected(question)" (change)="setAll(question, $event.checked)">
-          {{question.label}}
+        <mat-checkbox class="example-margin" *ngIf="!feature.singleOption" [checked]="allSelected(feature)"
+          [indeterminate]="someSelected(feature)" (change)="setAll(feature, $event.checked)">
+          {{feature.label}}
         </mat-checkbox>
 
-        <section class="example-section" *ngIf="!question.singleOption; else singleOptionTemplate">
+        <section class="example-section" *ngIf="!feature.singleOption; else singleOptionTemplate">
           <span class="example-list-section">
             <ul>
-              <li *ngFor="let option of question.options">
-                <mat-checkbox [checked]="featureForm.get(question.key)?.value.includes(option.value)"
-                  (change)="onOptionChange($event, question, option)">
+              <li *ngFor="let option of feature.options">
+                <mat-checkbox [checked]="featureForm.get(feature.key)?.value.includes(option.value)"
+                  (change)="onOptionChange($event, feature, option)">
                   {{option.display}}
                 </mat-checkbox>
               </li>
@@ -26,9 +28,9 @@
 
         <ng-template #singleOptionTemplate>
           <section class="example-section">
-            <mat-radio-group [formControlName]="question.key" (change)="onRadioChange($event, question)">
-              <label>{{question.label}}</label>
-              <div *ngFor="let option of question.options">
+            <mat-radio-group [formControlName]="feature.key" (change)="onRadioChange($event, feature)">
+              <label>{{feature.label}}</label>
+              <div *ngFor="let option of feature.options">
                 <mat-radio-button [value]="option.value">{{option.display}}</mat-radio-button>
               </div>
             </mat-radio-group>
