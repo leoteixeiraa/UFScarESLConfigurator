@@ -20,12 +20,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FeatureStepperComponent } from './shared/components/feature-stepper/feature-stepper.component';
+import { GeneratedCodeComponent } from './modules/generated-code/generated-code/generated-code.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FeatureFormComponent,
+    GeneratedCodeComponent,
     TopMenuComponent,
     FeatureStepperComponent,
   ],
@@ -44,7 +47,8 @@ import { FeatureStepperComponent } from './shared/components/feature-stepper/fea
     MatCardModule,
     MatGridListModule,
     MatButtonModule,
-    MatStepperModule
+    MatStepperModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
