@@ -1,0 +1,35 @@
+<section>
+<div class="container text-center mt-5">
+  <!-- Título e Descrição -->
+  <h1>Code Generated</h1>
+  <p>
+    The JSON code below represents the configurations chosen based on the ESL (Electronic Shelf Labels) features selected in the initial feature choice form.
+  </p>
+
+  <!-- Seção para escolher o tipo de código -->
+  <div class="mt-3 mb-4" class="codeType">
+    <label>Choose code type:</label>
+    <mat-form-field appearance="fill">
+      <mat-label>Code Type</mat-label>
+      <mat-select>
+        <mat-option value="JSON" selected>JSON</mat-option>
+        <!-- <mat-option value="Java">Java</mat-option>
+        <mat-option value="Python">Python</mat-option> -->
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="copyCodeToClipboard()">Copy Code</button>
+  </div>
+
+  <!-- Centralizar o card do código gerado -->
+  <div class="row justify-content-center mt-4">
+    <div class="col-12 col-md-8">
+      <!-- Card do Angular Material -->
+      <mat-card>
+        <mat-card-content>
+          <pre>{{ code | json }}</pre>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+</section>

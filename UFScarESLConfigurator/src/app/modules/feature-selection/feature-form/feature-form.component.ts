@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Feature } from 'src/app/core/modules/models/features.model';
 import { FeaturesService } from 'src/app/core/services/features.service';
+import { SharedDataService } from 'src/app/core/services/shared-data.service';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class FeatureFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private featuresService: FeaturesService,
+    private sharedDataService: SharedDataService
   ) { }
 
   ngOnInit() {
@@ -90,12 +92,14 @@ export class FeatureFormComponent implements OnInit {
     }
     this.featureForm.get(feature.key)?.setValue(selectedOptions);
     this.clearDependentQuestions(feature.key);
+    this.sharedDataService.updateFormData(this.featureForm.value);
   }
 
   // Atualiza o formulário quando um radio muda
   onRadioChange(event: any, feature: Feature): void {
     this.featureForm.get(feature.key)?.setValue(event.value);
     this.clearDependentQuestions(feature.key);
+    this.sharedDataService.updateFormData(this.featureForm.value);
   }
 
 

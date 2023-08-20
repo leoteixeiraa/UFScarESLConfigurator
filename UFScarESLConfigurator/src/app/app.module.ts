@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FeatureFormComponent } from './modules/feature-selection/components/feature-form/feature-form.component';
+import { FeatureFormComponent } from './modules/feature-selection/feature-form/feature-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -20,12 +20,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FeatureStepperComponent } from './shared/components/feature-stepper/feature-stepper.component';
+import { GeneratedCodeComponent } from './modules/generated-code/generated-code/generated-code.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FeatureFormComponent,
+    GeneratedCodeComponent,
     TopMenuComponent,
     FeatureStepperComponent,
   ],
@@ -44,7 +47,8 @@ import { FeatureStepperComponent } from './shared/components/feature-stepper/fea
     MatCardModule,
     MatGridListModule,
     MatButtonModule,
-    MatStepperModule
+    MatStepperModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
