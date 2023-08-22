@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import mermaid from 'mermaid';
+declare var window: any;
 
 @Component({
   selector: 'app-diagram-viewer',
@@ -17,77 +17,99 @@ export class DiagramViewerComponent implements OnInit {
   };
 
   public diagram = `
-    classDiagram
+  classDiagram
+  class WebPlatform {
+    +String platform
+    +List gestaoEstoque
+    +List type_application
+    +List type_instalation
+    +List type_display
+    +List type_installation_web
+    +List type_installation_mobile
+    +addPlatform()
+  }
 
-    Platform <|-- Android
-    Platform <|-- iOS
-    MobilePlatform *-- Infrastructure : has
-    Infrastructure <|-- Local
-    Infrastructure <|-- Hybrid
-    Infrastructure <|-- Cloud
-    Cloud <|-- PublicCloud
-    Platform o-- TypeDisplay : supports
-    Platform o-- TypeInstallationMobile : supports
+  class Cloud {
+    +String type : "public"
+  }
 
-    class Platform {
-        +String platform
-        +List gestaoEstoque
-        +List type_application
-        +List type_instalation
-        +List type_installation_web
-        +addPlatform()
-    }
+  class ESL_ESTOQUE {
+    +functionality()
+  }
 
-    class Android {
-        +specificFeatureAndroid()
-    }
+  class ESL_function {
+    +functionality()
+  }
 
-    class iOS {
-        +specificFeatureiOS()
-    }
+  class inventory_functions {
+    +functionality()
+  }
 
-    class MobilePlatform {
-        +List tipoPlatforma
-    }
+  class installation_check_funcions {
+    +functionality()
+  }
 
-    class Infrastructure {
-        +List infrastructure
-    }
+  class installation_check {
+    +functionality()
+  }
 
-    class Local {
-        +setupLocalEnvironment()
-    }
+  class comissioning_check {
+    +functionality()
+  }
 
-    class Hybrid {
-        +setupHybridEnvironment()
-    }
+  class LED {
+    +display()
+  }
 
-    class Cloud {
-        -TipoCloud tipoCloud
-        +setupCloudEnvironment()
-    }
+  class E_paper {
+    +display()
+  }
 
-    class PublicCloud {
-        +setupPublicCloud()
-    }
+  class OLED {
+    +display()
+  }
 
-    class TypeDisplay {
-        +List type_display
-        +displayTypeDetails()
-    }
+  class profissional_installation {
+    +install()
+  }
 
-    class TypeInstallationMobile {
-        +List type_installation_mobile
-        +installationDetails()
-    }
+  class commisioning {
+    +install()
+  }
+
+  WebPlatform "1" -- "*" ESL_ESTOQUE : has
+  WebPlatform "1" -- "*" ESL_function : has
+  WebPlatform "1" -- "1" Cloud : uses
+  WebPlatform "1" -- "*" inventory_functions : supports
+  WebPlatform "1" -- "*" installation_check_funcions : supports
+  WebPlatform "1" -- "*" installation_check : supports
+  WebPlatform "1" -- "*" comissioning_check : supports
+  WebPlatform "1" -- "*" LED : supports
+  WebPlatform "1" -- "*" E_paper : supports
+  WebPlatform "1" -- "*" OLED : supports
+  WebPlatform "1" -- "*" profissional_installation : supports
+  WebPlatform "1" -- "*" commisioning : supports
 `;
+
 
 
 
   constructor() { }
 
   ngOnInit(): void {
-    mermaid.initialize(this.config);
-    mermaid.init();  // Adiciona a chamada init para inicializar qualquer tag <pre class="mermaid"> no HTML
+    // Verifica se o Mermaid já está definido, caso contrário, espera pelo evento DOMContentLoaded
+    if (window.mermaid) {
+      this.initializeMermaid();
+    } else {
+      window.document.addEventListener('DOMContentLoaded', () => {
+        this.initializeMermaid();
+      });
+    }
   }
+
+  initializeMermaid(): void {
+    window.mermaid.initialize(this.config);
+    window.mermaid.init(); // Adiciona a chamada init para inicializar qualquer tag <pre class="mermaid"> no HTML
+  }
+
 }

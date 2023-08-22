@@ -39,9 +39,7 @@
               "src/styles.sass"
             ],
 
-            "scripts": [
-              "./node_modules/mermaid/dist/mermaid.core.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -104,8 +102,7 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "@angular/material/prebuilt-themes/pink-bluegrey.css",
-              "src/styles.sass",
-              "node_modules/mermaid/dist/mermaid.min.css"
+              "src/styles.sass"
             ],
             "scripts": []
           }
