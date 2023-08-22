@@ -5,7 +5,7 @@ export interface Feature {
   subfeatures?: Feature[];
   dependsOn?: string;
   condition?: any[];
-  singleOption?: boolean;
+  alternative?: boolean;
 }
 
 export interface Option {

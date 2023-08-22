@@ -46,7 +46,7 @@ export class FeatureFormComponent implements OnInit {
   private initForm(): void {
     this.features = this.featuresService.getFeatures();
     for (const feature of this.features) {
-      const control = feature.singleOption ? new FormControl('') : new FormControl([]);
+      const control = feature.alternative ? new FormControl('') : new FormControl([]);
       this.featureForm.addControl(feature.key, control);
     }
   }
@@ -60,7 +60,7 @@ export class FeatureFormComponent implements OnInit {
   clearDependentQuestions(questionKey: string): void {
     const dependentQuestions = this.features.filter(q => q.dependsOn === questionKey);
     for (const dq of dependentQuestions) {
-      const valueToSet = dq.singleOption ? '' : [];
+      const valueToSet = dq.alternative ? '' : [];
       this.featureForm.get(dq.key)?.setValue(valueToSet);
       this.clearDependentQuestions(dq.key);
     }
@@ -70,6 +70,34 @@ export class FeatureFormComponent implements OnInit {
   allSelected(feature: Feature): boolean {
     return feature.options?.every(option => this.featureForm.get(option.value.toString())?.value) || false;
   }
+
+  processForm(): any {
+    const processedData: any = {};
+
+    // Iterando pelas features
+    for (const feature of this.features) {
+      const value = this.featureForm.get(feature.key)?.value;
+
+      // Se é uma lista/array
+      if (Array.isArray(value)) {
+        processedData[feature.key] = {
+          values: value,
+          alternative: feature.alternative
+        };
+      }
+      // Se é uma string única
+      else {
+        processedData[feature.key] = {
+          value: value,
+          alternative: feature.alternative
+        };
+      }
+    }
+
+    return processedData;
+  }
+
+
 
   // Verifica se algumas opções estão selecionadas
   someSelected(feature: Feature): boolean {
@@ -92,14 +120,14 @@ export class FeatureFormComponent implements OnInit {
     }
     this.featureForm.get(feature.key)?.setValue(selectedOptions);
     this.clearDependentQuestions(feature.key);
-    this.sharedDataService.updateFormData(this.featureForm.value);
+    this.sharedDataService.updateFormData(this.processForm());
   }
 
   // Atualiza o formulário quando um radio muda
   onRadioChange(event: any, feature: Feature): void {
     this.featureForm.get(feature.key)?.setValue(event.value);
     this.clearDependentQuestions(feature.key);
-    this.sharedDataService.updateFormData(this.featureForm.value);
+    this.sharedDataService.updateFormData(this.processForm());
   }
 
 
