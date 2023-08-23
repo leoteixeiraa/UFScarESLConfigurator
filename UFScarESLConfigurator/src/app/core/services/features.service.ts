@@ -10,7 +10,7 @@ import { Feature } from '../modules/models/features.model';
       {
         key: 'platform',
         label: 'Which platform?',
-        alternative: true,
+        alternative: false,
         options: [
           { value: 'mobile', display: 'Mobile' },
           { value: 'web', display: 'Web' }
@@ -82,6 +82,18 @@ import { Feature } from '../modules/models/features.model';
         options: [
           { value: 'comissioning_check', display: 'Commissioning Check' },
           { value: 'installation_check', display: 'Installation Check' },
+        ]
+      },
+      {
+        key: 'physical_installation_type',
+        label: 'What type of physical installation?',
+        dependsOn: 'type_application',
+        condition: ['installation_check_funcions'],
+        alternative: false,
+        options: [
+          { value: 'shelf_mount', display: 'Shelf Mount' }, //Esta é a instalação padrão onde as etiquetas são montadas diretamente nas prateleiras.
+          { value: 'pegboard_hook', display: 'Pegboard Hook' }, // painéis perfurados para pendurar produtos.
+          { value: 'magnetic_mount', display: 'Magnetic Mount' }, // prateleiras metálicas
         ]
       },
       {

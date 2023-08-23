@@ -19,76 +19,60 @@ export class DiagramViewerComponent implements OnInit {
   public diagram = `
   classDiagram
   class WebPlatform {
-    +String platform
-    +List gestaoEstoque
-    +List type_application
-    +List type_instalation
-    +List type_display
-    +List type_installation_web
-    +List type_installation_mobile
-    +addPlatform()
+      +String platform : "web"
+      +Boolean alternative : true
+      +List gestaoEstoque
+      +List infrastructure
+      +List tipoCloud
+      +List type_application
+      +List type_instalation
+      +List physical_installation_type
+      +List type_display
+      +List type_installation_web
   }
+
+  class MobileApp {
+    +String platform : "mobile"
+    +Boolean alternative : true
+}
 
   class Cloud {
-    +String type : "public"
+      +String type : "public"
+      +Boolean alternative : true
   }
 
-  class ESL_ESTOQUE {
-    +functionality()
+  class GestaoEstoque {
+      +List functionality
+      +Boolean alternative : false
   }
 
-  class ESL_function {
-    +functionality()
+  class ApplicationFunctions {
+      +List functionality
+      +Boolean alternative : false
   }
 
-  class inventory_functions {
-    +functionality()
+  class InstallationTypes {
+      +List installType
+      +Boolean alternative : false
   }
 
-  class installation_check_funcions {
-    +functionality()
+  class DisplayTypes {
+      +List displayType
+      +Boolean alternative : false
   }
 
-  class installation_check {
-    +functionality()
+  class WebInstallationTypes {
+      +List installType
+      +Boolean alternative : false
   }
 
-  class comissioning_check {
-    +functionality()
-  }
+  WebPlatform "1" ..> "" Cloud
+  WebPlatform "1" ..> "1" GestaoEstoque
+  WebPlatform "1" ..> "1" ApplicationFunctions
+  WebPlatform "1" ..> "1" InstallationTypes
+  WebPlatform "1" ..> "1" DisplayTypes
+  WebPlatform "1" ..> "1" WebInstallationTypes
 
-  class LED {
-    +display()
-  }
-
-  class E_paper {
-    +display()
-  }
-
-  class OLED {
-    +display()
-  }
-
-  class profissional_installation {
-    +install()
-  }
-
-  class commisioning {
-    +install()
-  }
-
-  WebPlatform "1" -- "*" ESL_ESTOQUE : has
-  WebPlatform "1" -- "*" ESL_function : has
-  WebPlatform "1" -- "1" Cloud : uses
-  WebPlatform "1" -- "*" inventory_functions : supports
-  WebPlatform "1" -- "*" installation_check_funcions : supports
-  WebPlatform "1" -- "*" installation_check : supports
-  WebPlatform "1" -- "*" comissioning_check : supports
-  WebPlatform "1" -- "*" LED : supports
-  WebPlatform "1" -- "*" E_paper : supports
-  WebPlatform "1" -- "*" OLED : supports
-  WebPlatform "1" -- "*" profissional_installation : supports
-  WebPlatform "1" -- "*" commisioning : supports
 `;
 
 
