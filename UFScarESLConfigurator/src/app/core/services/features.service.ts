@@ -9,8 +9,8 @@ import { Feature } from '../modules/models/features.model';
     private features: Feature[] = [
       {
         key: 'platform',
-        label: 'Qual plataforma?',
-        singleOption: true,
+        label: 'Which platform?',
+        alternative: false,
         options: [
           { value: 'mobile', display: 'Mobile' },
           { value: 'web', display: 'Web' }
@@ -18,10 +18,10 @@ import { Feature } from '../modules/models/features.model';
       },
       {
         key: 'gestaoEstoque',
-        label: 'Gestao de Estoque?',
+        label: 'Stock Management?',
         dependsOn: 'platform',
-        condition: ['web'], // Apenas aparecerá se 'platform' for 'web'
-        singleOption: false,
+        condition: ['web'],
+        alternative: false,
         options: [
           { value: 'ESL_function', display: 'ESL_function' },
           { value: 'ESL_ESTOQUE', display: 'ESL_ESTOQUE' }
@@ -29,10 +29,10 @@ import { Feature } from '../modules/models/features.model';
       },
       {
         key: 'tipoPlatforma',
-        label: 'Qual platarfoma?',
+        label: 'Which platform type?',
         dependsOn: 'platform',
-        condition: ['mobile'], // Apenas aparecerá se 'platform' for 'mobile'
-        singleOption: false,
+        condition: ['mobile'],
+        alternative: false,
         options: [
           { value: 'android', display: 'Android' },
           { value: 'ios', display: 'IOS' },
@@ -40,10 +40,10 @@ import { Feature } from '../modules/models/features.model';
       },
       {
         key: 'infrastructure',
-        label: 'Qual Infrastrutura do seu ambiente?',
+        label: 'What is your infrastructure type?',
         dependsOn: 'platform',
         condition: ['web', 'mobile'],
-        singleOption: false,
+        alternative: false,
         options: [
           { value: 'local', display: 'Local' },
           { value: 'cloud', display: 'Cloud' },
@@ -52,10 +52,10 @@ import { Feature } from '../modules/models/features.model';
       },
       {
         key: 'tipoCloud',
-        label: 'Qual tipo de ambiente Cloud ?',
+        label: 'What type of Cloud environment?',
         dependsOn: 'infrastructure',
         condition: ['cloud'],
-        singleOption: true,
+        alternative: true,
         options: [
           { value: 'public', display: 'Public' },
           { value: 'private', display: 'Private' },
@@ -63,36 +63,48 @@ import { Feature } from '../modules/models/features.model';
       },
       {
         key: 'type_application',
-        label: 'Qual o tipo de aplicação ?',
+        label: 'What type of application?',
         dependsOn: 'platform',
         condition: ['web'],
-        singleOption: false,
+        alternative: false,
         options: [
-          { value: 'inventory_functions', display: 'Inventory_functions' },
-          { value: 'installation_check_funcions', display: 'Installation_Check_Funcions' },
-          { value: 'price_and_promotion_functions', display: 'Price_and_promotion_functions' },
+          { value: 'inventory_functions', display: 'Inventory Functions' },
+          { value: 'installation_check_funcions', display: 'Installation Check Functions' },
+          { value: 'price_and_promotion_functions', display: 'Price and Promotion Functions' },
         ]
       },
       {
         key: 'type_instalation',
-        label: 'Qual o tipo de instalação ?',
+        label: 'What type of installation?',
         dependsOn: 'type_application',
         condition: ['installation_check_funcions'],
-        singleOption: false,
+        alternative: false,
         options: [
-          { value: 'comissioning_check', display: 'Comissioning_check' },
-          { value: 'installation_check', display: 'Installation_Check' },
+          { value: 'comissioning_check', display: 'Commissioning Check' },
+          { value: 'installation_check', display: 'Installation Check' },
+        ]
+      },
+      {
+        key: 'physical_installation_type',
+        label: 'What type of physical installation?',
+        dependsOn: 'type_application',
+        condition: ['installation_check_funcions'],
+        alternative: false,
+        options: [
+          { value: 'shelf_mount', display: 'Shelf Mount' }, //Esta é a instalação padrão onde as etiquetas são montadas diretamente nas prateleiras.
+          { value: 'pegboard_hook', display: 'Pegboard Hook' }, // painéis perfurados para pendurar produtos.
+          { value: 'magnetic_mount', display: 'Magnetic Mount' }, // prateleiras metálicas
         ]
       },
       {
         key: 'type_display',
-        label: 'Qual o tipo de tela do seu ESL ?',
+        label: 'What type of ESL display?',
         dependsOn: 'platform',
         condition: ['web', 'mobile'],
-        singleOption: false,
+        alternative: false,
         options: [
           { value: 'LCD', display: 'LCD' },
-          { value: 'E_paper', display: 'E_paper' },
+          { value: 'E_paper', display: 'E-paper' },
           { value: 'LED', display: 'LED' },
           { value: 'OLED', display: 'OLED' },
           { value: 'TFT', display: 'TFT' },
@@ -100,26 +112,25 @@ import { Feature } from '../modules/models/features.model';
       },
       {
         key: 'type_installation_web',
-        label: 'Qual o tipo de instalacao Web ?',
+        label: 'What type of Web installation?',
         dependsOn: 'platform',
         condition: ['web'],
-        singleOption: false,
+        alternative: false,
         options: [
-          { value: 'profissional_installation', display: 'Profissional_installation' },
-          { value: 'commisioning', display: 'Commisioning' },
+          { value: 'profissional_installation', display: 'Professional Installation' },
+          { value: 'commisioning', display: 'Commissioning' },
         ]
       },
       {
         key: 'type_installation_mobile',
-        label: 'Qual o tipo de instalacao Mobile ?',
+        label: 'What type of Mobile installation?',
         dependsOn: 'platform',
         condition: ['mobile'],
-        singleOption: false,
+        alternative: false,
         options: [
-          { value: 'specific_device', display: 'Specific_device' },
+          { value: 'specific_device', display: 'Specific Device' },
         ]
       },
-
     ];
 
     getFeatures() {

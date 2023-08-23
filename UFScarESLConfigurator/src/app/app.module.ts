@@ -22,6 +22,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { FeatureStepperComponent } from './shared/components/feature-stepper/feature-stepper.component';
 import { GeneratedCodeComponent } from './modules/generated-code/generated-code/generated-code.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { DiagramViewerComponent } from './modules/diagram-viewer/diagram-viewer.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     GeneratedCodeComponent,
     TopMenuComponent,
     FeatureStepperComponent,
+    DiagramViewerComponent,
+
   ],
   imports: [
     BrowserModule,
