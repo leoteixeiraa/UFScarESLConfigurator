@@ -1,28 +1,29 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FeatureFormComponent } from './modules/feature-selection/feature-form/feature-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatCardModule } from '@angular/material/card';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatMenuModule } from '@angular/material/menu';
-import { TopMenuComponent } from './shared/components/top-menu/top-menu.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatStepperModule } from '@angular/material/stepper';
-import { FeatureStepperComponent } from './shared/components/feature-stepper/feature-stepper.component';
-import { GeneratedCodeComponent } from './modules/generated-code/generated-code/generated-code.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { DiagramViewerComponent } from './modules/diagram-viewer/diagram-viewer.component';
+import { FeatureFormComponent } from './modules/feature-selection/feature-form/feature-form.component';
+import { GeneratedCodeComponent } from './modules/generated-code/generated-code/generated-code.component';
+import { FeatureStepperComponent } from './shared/components/feature-stepper/feature-stepper.component';
+import { TopMenuComponent } from './shared/components/top-menu/top-menu.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { DiagramViewerComponent } from './modules/diagram-viewer/diagram-viewer.
     MatGridListModule,
     MatButtonModule,
     MatStepperModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

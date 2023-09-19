@@ -11,6 +11,7 @@ import { Feature } from '../modules/models/features.model';
         key: 'platform',
         label: 'Which platform?',
         alternative: false,
+        main: true,
         options: [
           { value: 'mobile', display: 'Mobile' },
           { value: 'web', display: 'Web' }
@@ -22,6 +23,7 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'platform',
         condition: ['web'],
         alternative: false,
+        main: false,
         options: [
           { value: 'ESL_function', display: 'ESL_function' },
           { value: 'ESL_ESTOQUE', display: 'ESL_ESTOQUE' }
@@ -33,6 +35,7 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'platform',
         condition: ['mobile'],
         alternative: false,
+        main: false,
         options: [
           { value: 'android', display: 'Android' },
           { value: 'ios', display: 'IOS' },
@@ -44,6 +47,7 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'platform',
         condition: ['web', 'mobile'],
         alternative: false,
+        main: false,
         options: [
           { value: 'local', display: 'Local' },
           { value: 'cloud', display: 'Cloud' },
@@ -56,6 +60,7 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'infrastructure',
         condition: ['cloud'],
         alternative: true,
+        main: false,
         options: [
           { value: 'public', display: 'Public' },
           { value: 'private', display: 'Private' },
@@ -67,6 +72,7 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'platform',
         condition: ['web'],
         alternative: false,
+        main: false,
         options: [
           { value: 'inventory_functions', display: 'Inventory Functions' },
           { value: 'installation_check_funcions', display: 'Installation Check Functions' },
@@ -78,6 +84,7 @@ import { Feature } from '../modules/models/features.model';
         label: 'What type of installation?',
         dependsOn: 'type_application',
         condition: ['installation_check_funcions'],
+        main: false,
         alternative: false,
         options: [
           { value: 'comissioning_check', display: 'Commissioning Check' },
@@ -90,6 +97,7 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'type_application',
         condition: ['installation_check_funcions'],
         alternative: false,
+        main: false,
         options: [
           { value: 'shelf_mount', display: 'Shelf Mount' }, //Esta é a instalação padrão onde as etiquetas são montadas diretamente nas prateleiras.
           { value: 'pegboard_hook', display: 'Pegboard Hook' }, // painéis perfurados para pendurar produtos.
@@ -102,6 +110,7 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'platform',
         condition: ['web', 'mobile'],
         alternative: false,
+        main: false,
         options: [
           { value: 'LCD', display: 'LCD' },
           { value: 'E_paper', display: 'E-paper' },
@@ -116,6 +125,7 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'platform',
         condition: ['web'],
         alternative: false,
+        main: false,
         options: [
           { value: 'profissional_installation', display: 'Professional Installation' },
           { value: 'commisioning', display: 'Commissioning' },
@@ -127,6 +137,7 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'platform',
         condition: ['mobile'],
         alternative: false,
+        main: false,
         options: [
           { value: 'specific_device', display: 'Specific Device' },
         ]
