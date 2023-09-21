@@ -73,29 +73,47 @@ export class FeatureFormComponent implements OnInit {
 
   processForm(): any {
     const processedData: any = {};
+    const selectedMainFeatures: any = {};
 
     // Iterando pelas features
     for (const feature of this.features) {
       const value = this.featureForm.get(feature.key)?.value;
 
+      if (feature.featureMain) {
+        selectedMainFeatures[feature.key] = {
+          value,
+          featureMain: feature.featureMain,
+          featureValue: feature.featureValue ? feature.featureValue : '',
+        };
+      }
+
       // Se é uma lista/array
       if (Array.isArray(value)) {
         processedData[feature.key] = {
           values: value,
-          alternative: feature.alternative
+          alternative: feature.alternative,
+          featureMain: feature.featureMain,
+          featureValue: feature.featureValue ? feature.featureValue : '',
+
         };
       }
       // Se é uma string única
       else {
         processedData[feature.key] = {
           value: value,
-          alternative: feature.alternative
+          alternative: feature.alternative,
+          featureMain: feature.featureMain, // adicionar valor "main" ao objeto
+          featureValue: feature.featureValue ? feature.featureValue : '',
         };
       }
     }
 
+    // Enviar os valores das features "Main" selecionadas para o shared-data service
+    this.sharedDataService.updateSelectedMainFeatures(selectedMainFeatures);
+
     return processedData;
   }
+
 
 
 

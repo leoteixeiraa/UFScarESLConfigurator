@@ -1,3 +1,4 @@
+import { SharedDataService } from 'src/app/core/services/shared-data.service';
 import { AfterViewInit, Component } from '@angular/core';
 import mermaid from 'mermaid';
 declare var window: any;
@@ -9,6 +10,9 @@ declare var window: any;
   styleUrls: ['./diagram-viewer.component.sass']
 })
 export class DiagramViewerComponent implements AfterViewInit {
+  private webData: any;
+  private mobileData: any;
+
 
   config = {
     startOnLoad: true,
@@ -18,7 +22,7 @@ export class DiagramViewerComponent implements AfterViewInit {
     securityLevel: 'loose',
   };
 
-  public diagram = `
+  public diagramWeb = `
   classDiagram
   class WebPlatform {
       +String platform : "web"
@@ -77,7 +81,7 @@ export class DiagramViewerComponent implements AfterViewInit {
 
 `;
 
-public diagram2 = `
+public diagramMobile = `
 classDiagram
 class WebPlatform {
     +String platform : "web"
@@ -90,11 +94,6 @@ class WebPlatform {
     +List physical_installation_type
     +List type_display
     +List type_installation_web
-}
-
-class MobileApp {
-  +String platform : "mobile"
-  +Boolean alternative : true
 }
 
 class Cloud {
@@ -136,10 +135,26 @@ WebPlatform "1" ..> "1" WebInstallationTypes
 
 `;
 
-  constructor() { }
+  constructor(
+    private sharedDataService: SharedDataService
+  ) {
+    this.webData = this.sharedDataService.getFilteredDataForMobile().subscribe(data => {
+      console.log('Dados filtrados para mobile:', data);
+    });
+
+   this.mobileData = this.sharedDataService.getFilteredDataForWeb().subscribe(data => {
+      console.log('Dados filtrados para web:', data);
+    });
+
+
+
+
+  }
 
   ngAfterViewInit(): void {
     this.initializeMermaid();
+    console.log('Valor das escolhas web -->', this.webData);
+    console.log('Valor das escolhas mobile -->', this.mobileData);
   }
 
   onTabChanged(): void {
