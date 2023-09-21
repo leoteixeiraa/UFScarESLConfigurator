@@ -13,7 +13,6 @@ export class DiagramViewerComponent implements AfterViewInit {
   private webData: any;
   private mobileData: any;
 
-
   config = {
     startOnLoad: true,
     sequence: {
@@ -22,139 +21,80 @@ export class DiagramViewerComponent implements AfterViewInit {
     securityLevel: 'loose',
   };
 
-  public diagramWeb = `
-  classDiagram
-  class WebPlatform {
-      +String platform : "web"
-      +Boolean alternative : true
-      +List gestaoEstoque
-      +List infrastructure
-      +List tipoCloud
-      +List type_application
-      +List type_instalation
-      +List physical_installation_type
-      +List type_display
-      +List type_installation_web
-  }
+  public diagramWeb = ``;
 
-  class MobileApp {
-    +String platform : "mobile"
-    +Boolean alternative : true
-}
-
-  class Cloud {
-      +String type : "public"
-      +Boolean alternative : true
-  }
-
-  class GestaoEstoque {
-      +List functionality
-      +Boolean alternative : false
-  }
-
-  class ApplicationFunctions {
-      +List functionality
-      +Boolean alternative : false
-  }
-
-  class InstallationTypes {
-      +List installType
-      +Boolean alternative : false
-  }
-
-  class DisplayTypes {
-      +List displayType
-      +Boolean alternative : false
-  }
-
-  class WebInstallationTypes {
-      +List installType
-      +Boolean alternative : false
-  }
-
-  WebPlatform "1" ..> "" Cloud
-  WebPlatform "1" ..> "1" GestaoEstoque
-  WebPlatform "1" ..> "1" ApplicationFunctions
-  WebPlatform "1" ..> "1" InstallationTypes
-  WebPlatform "1" ..> "1" DisplayTypes
-  WebPlatform "1" ..> "1" WebInstallationTypes
-
-`;
-
-public diagramMobile = `
-classDiagram
-class WebPlatform {
-    +String platform : "web"
-    +Boolean alternative : true
-    +List gestaoEstoque
-    +List infrastructure
-    +List tipoCloud
-    +List type_application
-    +List type_instalation
-    +List physical_installation_type
-    +List type_display
-    +List type_installation_web
-}
-
-class Cloud {
-    +String type : "public"
-    +Boolean alternative : true
-}
-
-class GestaoEstoque {
-    +List functionality
-    +Boolean alternative : false
-}
-
-class ApplicationFunctions {
-    +List functionality
-    +Boolean alternative : false
-}
-
-class InstallationTypes {
-    +List installType
-    +Boolean alternative : false
-}
-
-class DisplayTypes {
-    +List displayType
-    +Boolean alternative : false
-}
-
-class WebInstallationTypes {
-    +List installType
-    +Boolean alternative : false
-}
-
-WebPlatform "1" ..> "" Cloud
-WebPlatform "1" ..> "1" GestaoEstoque
-WebPlatform "1" ..> "1" ApplicationFunctions
-WebPlatform "1" ..> "1" InstallationTypes
-WebPlatform "1" ..> "1" DisplayTypes
-WebPlatform "1" ..> "1" WebInstallationTypes
-
-`;
 
   constructor(
     private sharedDataService: SharedDataService
   ) {
-    this.webData = this.sharedDataService.getFilteredDataForMobile().subscribe(data => {
-      console.log('Dados filtrados para mobile:', data);
-    });
-
-   this.mobileData = this.sharedDataService.getFilteredDataForWeb().subscribe(data => {
+    this.webData = this.sharedDataService.getFilteredDataForWeb().subscribe(data => {
       console.log('Dados filtrados para web:', data);
     });
 
-
-
+   this.mobileData = this.sharedDataService.getFilteredDataForMobile().subscribe(data => {
+      console.log('Dados filtrados para mobile:', data);
+    });
 
   }
 
   ngAfterViewInit(): void {
-    this.initializeMermaid();
-    console.log('Valor das escolhas web -->', this.webData);
-    console.log('Valor das escolhas mobile -->', this.mobileData);
+    this.webData = this.sharedDataService.getFilteredDataForWeb().subscribe(data => {
+      this.diagramWeb = this.generateDiagram(data);
+      console.log(this.diagramWeb);
+      // Re-inicializar o Mermaid após a atualização do diagramWeb
+      this.initializeMermaid();
+    });
+  }
+
+
+  generateDiagram(data: any): string {
+    let diagram = 'classDiagram\n';
+    let relations = ''; // String separada para acumular as relações entre as classes
+
+    diagram += `class WebPlatform {\n`;
+
+    // Lista de chaves recebidas da API
+    const receivedKeys = Object.keys(data);
+
+    // Adicionando classes ao WebPlatform com base nas chaves recebidas
+    for (const key of receivedKeys) {
+      if (data.hasOwnProperty(key)) {
+        diagram += `  +List ${key}\n`;
+      }
+    }
+
+    diagram += '}\n';
+
+    // Adicionando outras classes e suas conexões
+    for (const key of receivedKeys) {
+      if (data.hasOwnProperty(key)) {
+        const values = data[key].values.join(', ');
+        const alternative = data[key].alternative;
+        const featureMain = data[key].featureMain;
+
+        diagram += `class ${this.capitalizeFirstLetter(key)} {\n`;
+        diagram += `  +List values : ["${values}"]\n`;
+        diagram += `  +Boolean alternative : ${alternative}\n`;
+        diagram += `  +Boolean featureMain : ${featureMain}\n`;
+        diagram += '}\n';
+
+        // Adicionando a relação na string separada
+        relations += `WebPlatform "1" ..> "1" ${this.capitalizeFirstLetter(key)}\n`;
+      }
+    }
+
+    // Adicionando as relações ao final do diagrama
+    diagram += relations;
+
+    return `${diagram}`;
+
+  }
+
+
+
+  // Utilidade para capitalizar a primeira letra de uma string
+  capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   onTabChanged(): void {
