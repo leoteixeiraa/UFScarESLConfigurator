@@ -1,0 +1,34 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/dist
+
+# misc
+.DS_Store
+.idea
+.vscode
+.angular
+*.rs.bk
+*.swp
+*.swo
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
+.TDS_Store
+
+# User-specific config
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+package-lock.json
