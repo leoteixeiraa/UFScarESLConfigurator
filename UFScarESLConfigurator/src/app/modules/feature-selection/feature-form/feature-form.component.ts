@@ -39,12 +39,10 @@ export class FeatureFormComponent implements OnInit {
       return feature.condition?.includes(dependsOnValue) ?? false;
 
     }
-
-
-
   // Inicializa o formulário com os controles necessários
   private initForm(): void {
     this.features = this.featuresService.getFeatures();
+    console.log('Lista de features -->', this.features);
     for (const feature of this.features) {
       const control = feature.alternative ? new FormControl('') : new FormControl([]);
       this.featureForm.addControl(feature.key, control);
@@ -114,9 +112,6 @@ export class FeatureFormComponent implements OnInit {
     return processedData;
   }
 
-
-
-
   // Verifica se algumas opções estão selecionadas
   someSelected(feature: Feature): boolean {
     return feature.options?.some(option => this.featureForm.get(option.value.toString())?.value) || false;
@@ -138,8 +133,29 @@ export class FeatureFormComponent implements OnInit {
     }
     this.featureForm.get(feature.key)?.setValue(selectedOptions);
     this.clearDependentQuestions(feature.key);
+    console.log('Formulário atualizado:', this.featureForm.value);
+
     this.sharedDataService.updateFormData(this.processForm());
   }
+
+  getIconsForFeature(feature: Feature): string[] {
+    const selectedPlatforms = this.featureForm.get('platform')?.value || [];
+
+    if (!feature.featureValue) return [];
+
+    let icons = [];
+
+    if (feature.featureValue.includes('web') && selectedPlatforms.includes('web')) {
+      icons.push('computer');
+    }
+
+    if (feature.featureValue.includes('mobile') && selectedPlatforms.includes('mobile')) {
+      icons.push('add_to_home_screen');
+    }
+
+    return icons;
+  }
+
 
   // Atualiza o formulário quando um radio muda
   onRadioChange(event: any, feature: Feature): void {

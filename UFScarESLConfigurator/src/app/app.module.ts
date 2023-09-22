@@ -26,6 +26,7 @@ import { FeatureStepperComponent } from './shared/components/feature-stepper/fea
 import { TopMenuComponent } from './shared/components/top-menu/top-menu.component';
 import { WebDiagramPipe } from './shared/pipes/web-diagram.pipe';
 import { MobileDiagramPipe } from './shared/pipes/mobile-diagram.pipe';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { MobileDiagramPipe } from './shared/pipes/mobile-diagram.pipe';
     MatStepperModule,
     MatFormFieldModule,
     MatTabsModule,
+    MatIconModule
   ],
   providers: [WebDiagramPipe, MobileDiagramPipe],
   bootstrap: [AppComponent]

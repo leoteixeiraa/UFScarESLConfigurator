@@ -9,13 +9,15 @@
 
       <!-- Usando a função 'shouldDisplayQuestion' para verificar se a questão deve ser exibida -->
       <div *ngIf="shouldDisplayQuestion(feature)">
-
         <mat-checkbox class="example-margin" *ngIf="!feature.alternative" [checked]="allSelected(feature)"
-          [indeterminate]="someSelected(feature)" (change)="setAll(feature, $event.checked)">
-          {{feature.label}}
-        </mat-checkbox>
-
+        [indeterminate]="someSelected(feature)" (change)="setAll(feature, $event.checked)">
+        {{feature.label}}
+      </mat-checkbox>
+      <div class="iconStatus" *ngFor="let icon of getIconsForFeature(feature)">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" [fontIcon]="icon"></mat-icon>
+      </div>
         <section class="example-section" *ngIf="!feature.alternative; else alternativeTemplate">
+
           <span class="example-list-section">
             <ul>
               <li *ngFor="let option of feature.options">
