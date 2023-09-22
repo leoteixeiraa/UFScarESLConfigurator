@@ -24,6 +24,8 @@ import { FeatureFormComponent } from './modules/feature-selection/feature-form/f
 import { GeneratedCodeComponent } from './modules/generated-code/generated-code/generated-code.component';
 import { FeatureStepperComponent } from './shared/components/feature-stepper/feature-stepper.component';
 import { TopMenuComponent } from './shared/components/top-menu/top-menu.component';
+import { WebDiagramPipe } from './shared/pipes/web-diagram.pipe';
+import { MobileDiagramPipe } from './shared/pipes/mobile-diagram.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { TopMenuComponent } from './shared/components/top-menu/top-menu.componen
     TopMenuComponent,
     FeatureStepperComponent,
     DiagramViewerComponent,
-
+    WebDiagramPipe,
+    MobileDiagramPipe,
   ],
   imports: [
     BrowserModule,
@@ -53,9 +56,9 @@ import { TopMenuComponent } from './shared/components/top-menu/top-menu.componen
     MatButtonModule,
     MatStepperModule,
     MatFormFieldModule,
-    MatTabsModule
+    MatTabsModule,
   ],
-  providers: [],
+  providers: [WebDiagramPipe, MobileDiagramPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

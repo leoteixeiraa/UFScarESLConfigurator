@@ -10,15 +10,11 @@
   </div>
 
   <mat-tab-group (selectedTabChange)="onTabChanged()">
-    <mat-tab label="principal">
-      <div id="principalGraph" class="mermaid">
-        {{ diagramWeb }}
-      </div>
+    <mat-tab label="WebPlataform">
+      <div id="diagramaClassWeb" *ngIf="diagramWeb.trim() !== ''"></div>
     </mat-tab>
     <mat-tab label="MobileApp">
-      <div id="mobileAppGraph" class="mermaid">
-        <!-- {{ diagramMobile }} -->
-      </div>
+      <div id="diagramaClassMobile" *ngIf="diagramWeb.trim() !== ''"></div>
     </mat-tab>
   </mat-tab-group>
 </section>
