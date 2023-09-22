@@ -1,4 +1,4 @@
-  import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Feature } from '../modules/models/features.model';
 
   @Injectable({
@@ -11,6 +11,7 @@ import { Feature } from '../modules/models/features.model';
         key: 'platform',
         label: 'Which platform?',
         alternative: false,
+        featureMain: true,
         options: [
           { value: 'mobile', display: 'Mobile' },
           { value: 'web', display: 'Web' }
@@ -22,6 +23,8 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'platform',
         condition: ['web'],
         alternative: false,
+        featureMain: false,
+        featureValue: ['web'],
         options: [
           { value: 'ESL_function', display: 'ESL_function' },
           { value: 'ESL_ESTOQUE', display: 'ESL_ESTOQUE' }
@@ -33,6 +36,8 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'platform',
         condition: ['mobile'],
         alternative: false,
+        featureMain: false,
+        featureValue: ['mobile'],
         options: [
           { value: 'android', display: 'Android' },
           { value: 'ios', display: 'IOS' },
@@ -44,6 +49,8 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'platform',
         condition: ['web', 'mobile'],
         alternative: false,
+        featureMain: false,
+        featureValue: ['web', 'mobile'],
         options: [
           { value: 'local', display: 'Local' },
           { value: 'cloud', display: 'Cloud' },
@@ -56,6 +63,8 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'infrastructure',
         condition: ['cloud'],
         alternative: true,
+        featureMain: false,
+        featureValue: ['web', 'mobile'],
         options: [
           { value: 'public', display: 'Public' },
           { value: 'private', display: 'Private' },
@@ -67,6 +76,8 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'platform',
         condition: ['web'],
         alternative: false,
+        featureMain: false,
+        featureValue: ['web'],
         options: [
           { value: 'inventory_functions', display: 'Inventory Functions' },
           { value: 'installation_check_funcions', display: 'Installation Check Functions' },
@@ -78,7 +89,9 @@ import { Feature } from '../modules/models/features.model';
         label: 'What type of installation?',
         dependsOn: 'type_application',
         condition: ['installation_check_funcions'],
+        featureMain: false,
         alternative: false,
+        featureValue: ['web'],
         options: [
           { value: 'comissioning_check', display: 'Commissioning Check' },
           { value: 'installation_check', display: 'Installation Check' },
@@ -90,6 +103,8 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'type_application',
         condition: ['installation_check_funcions'],
         alternative: false,
+        featureMain: false,
+        featureValue: ['web'],
         options: [
           { value: 'shelf_mount', display: 'Shelf Mount' }, //Esta é a instalação padrão onde as etiquetas são montadas diretamente nas prateleiras.
           { value: 'pegboard_hook', display: 'Pegboard Hook' }, // painéis perfurados para pendurar produtos.
@@ -102,6 +117,8 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'platform',
         condition: ['web', 'mobile'],
         alternative: false,
+        featureMain: false,
+        featureValue: ['web', 'mobile'],
         options: [
           { value: 'LCD', display: 'LCD' },
           { value: 'E_paper', display: 'E-paper' },
@@ -115,7 +132,9 @@ import { Feature } from '../modules/models/features.model';
         label: 'What type of Web installation?',
         dependsOn: 'platform',
         condition: ['web'],
+        featureValue: ['web'],
         alternative: false,
+        featureMain: false,
         options: [
           { value: 'profissional_installation', display: 'Professional Installation' },
           { value: 'commisioning', display: 'Commissioning' },
@@ -127,6 +146,8 @@ import { Feature } from '../modules/models/features.model';
         dependsOn: 'platform',
         condition: ['mobile'],
         alternative: false,
+        featureMain: false,
+        featureValue: ['mobile'],
         options: [
           { value: 'specific_device', display: 'Specific Device' },
         ]

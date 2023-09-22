@@ -39,12 +39,10 @@ export class FeatureFormComponent implements OnInit {
       return feature.condition?.includes(dependsOnValue) ?? false;
 
     }
-
-
-
   // Inicializa o formulário com os controles necessários
   private initForm(): void {
     this.features = this.featuresService.getFeatures();
+    console.log('Lista de features -->', this.features);
     for (const feature of this.features) {
       const control = feature.alternative ? new FormControl('') : new FormControl([]);
       this.featureForm.addControl(feature.key, control);
@@ -73,31 +71,46 @@ export class FeatureFormComponent implements OnInit {
 
   processForm(): any {
     const processedData: any = {};
+    const selectedMainFeatures: any = {};
 
     // Iterando pelas features
     for (const feature of this.features) {
       const value = this.featureForm.get(feature.key)?.value;
 
+      if (feature.featureMain) {
+        selectedMainFeatures[feature.key] = {
+          value,
+          featureMain: feature.featureMain,
+          featureValue: feature.featureValue ? feature.featureValue : '',
+        };
+      }
+
       // Se é uma lista/array
       if (Array.isArray(value)) {
         processedData[feature.key] = {
           values: value,
-          alternative: feature.alternative
+          alternative: feature.alternative,
+          featureMain: feature.featureMain,
+          featureValue: feature.featureValue ? feature.featureValue : '',
+
         };
       }
       // Se é uma string única
       else {
         processedData[feature.key] = {
           value: value,
-          alternative: feature.alternative
+          alternative: feature.alternative,
+          featureMain: feature.featureMain, // adicionar valor "main" ao objeto
+          featureValue: feature.featureValue ? feature.featureValue : '',
         };
       }
     }
 
+    // Enviar os valores das features "Main" selecionadas para o shared-data service
+    this.sharedDataService.updateSelectedMainFeatures(selectedMainFeatures);
+
     return processedData;
   }
-
-
 
   // Verifica se algumas opções estão selecionadas
   someSelected(feature: Feature): boolean {
@@ -120,8 +133,29 @@ export class FeatureFormComponent implements OnInit {
     }
     this.featureForm.get(feature.key)?.setValue(selectedOptions);
     this.clearDependentQuestions(feature.key);
+    console.log('Formulário atualizado:', this.featureForm.value);
+
     this.sharedDataService.updateFormData(this.processForm());
   }
+
+  getIconsForFeature(feature: Feature): string[] {
+    const selectedPlatforms = this.featureForm.get('platform')?.value || [];
+
+    if (!feature.featureValue) return [];
+
+    let icons = [];
+
+    if (feature.featureValue.includes('web') && selectedPlatforms.includes('web')) {
+      icons.push('computer');
+    }
+
+    if (feature.featureValue.includes('mobile') && selectedPlatforms.includes('mobile')) {
+      icons.push('add_to_home_screen');
+    }
+
+    return icons;
+  }
+
 
   // Atualiza o formulário quando um radio muda
   onRadioChange(event: any, feature: Feature): void {

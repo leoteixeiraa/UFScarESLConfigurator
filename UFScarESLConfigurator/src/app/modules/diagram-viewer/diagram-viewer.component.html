@@ -1,12 +1,20 @@
 <section>
   <div class="container text-center mt-5">
     <h2>Class Diagram View</h2>
-    <p>In this step, a UML class diagram is generated based on the features selected by the user in the previous stage.
+    <p>
+      In this step, a UML class diagram is generated based on the features
+      selected by the user in the previous stage.
     </p>
-    <br>
-    <br>
+    <br />
+    <br />
   </div>
-  <pre class="mermaid">
-  {{ diagram }}
-</pre>
+
+  <mat-tab-group (selectedTabChange)="onTabChanged()">
+    <mat-tab label="WebPlataform">
+      <div id="diagramaClassWeb" *ngIf="diagramWeb.trim() !== ''"></div>
+    </mat-tab>
+    <mat-tab label="MobileApp">
+      <div id="diagramaClassMobile" *ngIf="diagramWeb.trim() !== ''"></div>
+    </mat-tab>
+  </mat-tab-group>
 </section>
