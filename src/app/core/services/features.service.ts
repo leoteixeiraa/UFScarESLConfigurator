@@ -141,6 +141,20 @@ import { Feature } from '../modules/models/features.model';
         ]
       },
       {
+        key: 'mobile_user_authentication',
+        label: 'User Authentication?',
+        dependsOn: 'platform',
+        condition: ['mobile'],
+        alternative: false,
+        featureMain: false,
+        featureValue: ['mobile'],
+        options: [
+          { value: 'biometric', display: 'Biometric Authentication' },
+          { value: 'two_factor', display: 'Two-Factor Authentication' },
+          { value: 'single_sign_on', display: 'Single Sign-On' },
+        ]
+      },
+      {
         key: 'type_installation_mobile',
         label: 'What type of Mobile installation?',
         dependsOn: 'platform',
@@ -152,6 +166,149 @@ import { Feature } from '../modules/models/features.model';
           { value: 'specific_device', display: 'Specific Device' },
         ]
       },
+      {
+        key: 'notification_settings',
+        label: 'Settings for Notifications?',
+        dependsOn: 'platform',
+        condition: ['mobile'],
+        alternative: false,
+        featureMain: false,
+        featureValue: ['mobile'],
+        options: [
+          { value: 'push_notifications', display: 'Push Notifications' },
+          { value: 'email_notifications', display: 'Email Notifications' },
+          { value: 'sms_notifications', display: 'SMS Notifications' },
+        ]
+      },
+      {
+        key: 'inventory_search',
+        label: 'Inventory Search?',
+        dependsOn: 'platform',
+        condition: ['mobile'],
+        alternative: false,
+        featureMain: false,
+        featureValue: ['mobile'],
+        options: [
+          { value: 'barcode_search', display: 'Barcode Search' },
+          { value: 'keyword_search', display: 'Keyword Search' },
+          { value: 'camera_view', display: 'Camera View' },
+          { value: 'coordinates_translator', display: 'Coordinates Translator' },
+          { value: 'gallery_view', display: 'Gallery View' },
+          { value: 'scanner', display: 'Scanner' },
+          
+        ],
+        
+      },
+      {
+        key: 'lm_decommissioning_log_item',
+        label: 'Log Item for Decommissioning?',
+        dependsOn: 'platform',
+        condition: ['mobile'],
+        alternative: false,
+        featureMain: false,
+        featureValue: ['mobile'],
+        options: [
+          { value: 'timestamp', display: 'Timestamp' },
+          { value: 'mac_address', display: 'MAC Address' },
+          { value: 'operation_status', display: 'Operation Status' },
+          { value: 'success_indicator', display: 'Success Indicator' },
+        ]
+      },
+      {
+        key: 'lm_commissioning_log_item',
+        label: 'Log Item for Commissioning?',
+        dependsOn: 'platform',
+        condition: ['mobile'],
+        alternative: false,
+        featureMain: false,
+        featureValue: ['mobile'],
+        options: [
+          { value: 'timestamp', display: 'Timestamp' },
+          { value: 'mac_address', display: 'MAC Address' },
+          { value: 'product_ean', display: 'Product EAN' },
+          { value: 'operation_status', display: 'Operation Status' },
+          { value: 'operation_status_description', display: 'Operation Status Description' },
+          { value: 'employee_code', display: 'Employee Code' },
+          { value: 'success_indicator', display: 'Success Indicator' }
+        ]
+      },
+      {
+        key: 'qr_code_reader',
+        label: 'QR Code Reader?',
+        dependsOn: 'platform',
+        condition: ['mobile'],
+        alternative: false,
+        featureMain: false,
+        featureValue: ['mobile'],
+        options: [
+          { value: 'overlay_color', display: 'Overlay Color' },
+          { value: 'scan_area', display: 'Scan Area' },
+          { value: 'border_color', display: 'Border Color' },
+          { value: 'border_width', display: 'Border Width' },
+          { value: 'border_radius', display: 'Border Radius' },
+          { value: 'border_painter', display: 'Border Painter' },
+          { value: 'overlay_with_hole_painter', display: 'Overlay With Hole Painter' }
+        ]
+      },
+      {
+        "key": "commissioning_process_manager",
+        "label": "Commissioning Process Manager?",
+        "dependsOn": "platform",
+        "condition": ["mobile"],
+        "alternative": false,
+        "featureMain": false,
+        "featureValue": ["mobile"],
+        "options": [
+          {
+            "value": "sgtin_parameter",
+            "display": "SGTIN Parameter"
+          },
+          {
+            "value": "mac_parameter",
+            "display": "MAC Parameter"
+          },
+          {
+            "value": "auth_token",
+            "display": "Authentication Token"
+          },
+          {
+            "value": "employee_code",
+            "display": "Employee Code"
+          },
+          {
+            "value": "store_business_unit_code",
+            "display": "Store Business Unit Code"
+          },
+          {
+            "value": "timestamp",
+            "display": "Timestamp"
+          },
+          {
+            "value": "mongo_usr_actions_object_id",
+            "display": "Mongo User Actions Object ID"
+          },
+          {
+            "value": "send_to_mongo",
+            "display": "Send to Mongo"
+          },
+          {
+            "value": "send_to_connector",
+            "display": "Send to Connector"
+          },
+          {
+            "value": "commission_method",
+            "display": "Commission Method"
+          },
+          {
+            "value": "decommission_method",
+            "display": "Decommission Method"
+          }
+        ]
+      }
+      
+      
+      
+      
     ];
 
     getFeatures() {

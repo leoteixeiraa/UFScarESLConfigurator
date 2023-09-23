@@ -4,6 +4,29 @@
     <p>This step is responsible for selecting the features for your ESL (Electronic Shelf Label) application.</p>
     <br>
   </div>
+  <br>
+  <br>
+  <br>
+  <div class="container mt-3">
+    <div class="icon-legend">
+        <div class="icon-text">
+            <mat-icon aria-hidden="false" aria-label="Example computer icon" fontIcon="computer"></mat-icon>
+            <p class="inline-text">This icon represents the features for the web system.</p>
+        </div>
+        <div class="icon-text">
+            <mat-icon aria-hidden="false" aria-label="Example mobile icon" fontIcon="add_to_home_screen"></mat-icon>
+            <p class="inline-text">This icon represents the features for the mobile application.</p>
+        </div>
+        <div class="icon-text">
+            <mat-icon aria-hidden="false" aria-label="Example mobile and computer icons" fontIcon="computer"></mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example mobile and computer icons" fontIcon="add_to_home_screen"></mat-icon>
+            <p class="inline-text">These icons together represent that the mobile and computer features are compatible, identical features for both platforms.</p>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
   <form [formGroup]="featureForm">
     <div *ngFor="let feature of features">
 
