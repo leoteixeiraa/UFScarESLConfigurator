@@ -1,21 +1,23 @@
-import { MobileDiagramPipe } from './../../shared/pipes/mobile-diagram.pipe';
-import { SharedDataService } from 'src/app/core/services/shared-data.service';
 import {
   AfterViewInit,
-  Component,
   ChangeDetectorRef,
+  Component,
   ElementRef,
+  NgZone,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 import mermaid from 'mermaid';
+import { SharedDataService } from 'src/app/core/services/shared-data.service';
 import { WebDiagramPipe } from 'src/app/shared/pipes/web-diagram.pipe';
+import { MobileDiagramPipe } from './../../shared/pipes/mobile-diagram.pipe';
 
 @Component({
   selector: 'app-diagram-viewer',
   templateUrl: './diagram-viewer.component.html',
   styleUrls: ['./diagram-viewer.component.sass'],
 })
-export class DiagramViewerComponent implements AfterViewInit, OnDestroy {
+export class DiagramViewerComponent implements AfterViewInit, OnDestroy, OnInit {
   private webDataSubscription: any;
   private mobileDataSubscription: any;
 
@@ -35,8 +37,13 @@ export class DiagramViewerComponent implements AfterViewInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private el: ElementRef,
     private webDiagramPipe: WebDiagramPipe,
-    private mobileDiagramPipe: MobileDiagramPipe
+    private mobileDiagramPipe: MobileDiagramPipe,
+    private ngZone: NgZone,
   ) {}
+
+  ngOnInit(): void {
+    mermaid.initialize(this.config);
+  }
 
   ngAfterViewInit(): void {
     mermaid.initialize(this.config);
@@ -63,13 +70,18 @@ export class DiagramViewerComponent implements AfterViewInit, OnDestroy {
         this.cdr.detectChanges();
       });
   }
+  
 
   renderMermaidDiagram(diagramString: string, containerId: string): void {
-    const container = this.el.nativeElement.querySelector(`#${containerId}`);
-    if (container) {
-      container.innerHTML = `<div class="mermaid">${diagramString}</div>`;
-      mermaid.init(undefined, container.querySelectorAll('.mermaid'));
-    }
+    this.ngZone.runOutsideAngular(() => {
+      const container = this.el.nativeElement.querySelector(`#${containerId}`);
+      if (container) {
+        container.innerHTML = `<div class="mermaid">${diagramString}</div>`;
+        setTimeout(() => {
+          mermaid.init(undefined, container.querySelectorAll('.mermaid'));
+        }, 0);
+      }
+    });
   }
 
   private shouldRenderDiagramWeb(): boolean {
@@ -78,7 +90,7 @@ export class DiagramViewerComponent implements AfterViewInit, OnDestroy {
   }
   private shouldRenderDiagramMobile(): boolean {
     // Checa se o diagramMobile contém mais do que apenas a classe padrão mobilePlatform
-    return (this.diagramMobile.match(/class/g) || []).length > 0.5;
+    return (this.diagramMobile.match(/class/g) || []).length > 2;
   }
 
   onTabChanged(): void {
@@ -93,4 +105,10 @@ export class DiagramViewerComponent implements AfterViewInit, OnDestroy {
       this.mobileDataSubscription.unsubscribe();
     }
   }
+
+  // No seu componente
+  hasContent(value: string): boolean {
+    return value.trim() !== '';
+  }
+
 }
