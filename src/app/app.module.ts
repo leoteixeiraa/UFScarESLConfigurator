@@ -27,6 +27,7 @@ import { TopMenuComponent } from './shared/components/top-menu/top-menu.componen
 import { WebDiagramPipe } from './shared/pipes/web-diagram.pipe';
 import { MobileDiagramPipe } from './shared/pipes/mobile-diagram.pipe';
 import { MatIconModule } from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog'
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatStepperModule,
     MatFormFieldModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [WebDiagramPipe, MobileDiagramPipe],
   bootstrap: [AppComponent]

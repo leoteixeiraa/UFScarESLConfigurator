@@ -1,39 +1,17 @@
 <section>
   <div class="container text-center mt-5">
-    <h2>Select Your Features</h2>
+    <h2 >Select Your Features</h2>
     <p>This step is responsible for selecting the features for your ESL (Electronic Shelf Label) application.</p>
     <br>
   </div>
-  <br>
-  <br>
-  <br>
-  <div class="container mt-3">
-    <div class="icon-legend">
-        <div class="icon-text">
-            <mat-icon aria-hidden="false" aria-label="Example computer icon" fontIcon="computer"></mat-icon>
-            <p class="inline-text">This icon represents the features for the web system.</p>
-        </div>
-        <div class="icon-text">
-            <mat-icon aria-hidden="false" aria-label="Example mobile icon" fontIcon="add_to_home_screen"></mat-icon>
-            <p class="inline-text">This icon represents the features for the mobile application.</p>
-        </div>
-        <div class="icon-text">
-            <mat-icon aria-hidden="false" aria-label="Example mobile and computer icons" fontIcon="computer"></mat-icon>
-            <mat-icon aria-hidden="false" aria-label="Example mobile and computer icons" fontIcon="add_to_home_screen"></mat-icon>
-            <p class="inline-text">These icons together represent that the mobile and computer features are compatible, identical features for both platforms.</p>
-        </div>
-    </div>
-</div>
-<br>
-<br>
-<br>
+ 
   <form [formGroup]="featureForm">
     <div *ngFor="let feature of features">
 
       <!-- Usando a função 'shouldDisplayQuestion' para verificar se a questão deve ser exibida -->
       <div *ngIf="shouldDisplayQuestion(feature)">
         <mat-checkbox class="example-margin" *ngIf="!feature.alternative" [checked]="allSelected(feature)"
-        [indeterminate]="someSelected(feature)" (change)="setAll(feature, $event.checked)">
+        [indeterminate]="someSelected(feature)"   (change)="setAll(feature, $event.checked)">
         {{feature.label}}
       </mat-checkbox>
       <div class="iconStatus" *ngFor="let icon of getIconsForFeature(feature)">
@@ -44,7 +22,7 @@
           <span class="example-list-section">
             <ul>
               <li *ngFor="let option of feature.options">
-                <mat-checkbox [checked]="featureForm.get(feature.key)?.value.includes(option.value)"
+                <mat-checkbox  [checked]="featureForm.get(feature.key)?.value.includes(option.value)"
                   (change)="onOptionChange($event, feature, option)">
                   {{option.display}}
                 </mat-checkbox>
@@ -67,4 +45,25 @@
       </div>
     </div>
   </form>
+
+ 
+  <div class="navigation" [class.active]="isActive" (click)="toggleNavigation()">
+    <span *ngFor="let icon of icons" [attr.data-message]="icon.message" (click)="openDialog($event)">
+        <span aria-hidden="false" [attr.aria-label]="icon.label">
+            <mat-icon [fontIcon]="icon.fontIcon"></mat-icon>
+        </span>
+    </span>
+    <span data-message="These icons together represent that the mobile and computer features are compatible, identical features for both platforms."
+        (click)="openDialog($event)">
+        <mat-icon aria-hidden="false" aria-label="Example mobile and computer icons" fontIcon="computer"></mat-icon>
+        <mat-icon aria-hidden="false" aria-label="Example mobile and computer icons" fontIcon="add_to_home_screen"></mat-icon>
+    </span>
+</div>
+
+  
+  
+  
+
+
+
 </section>
