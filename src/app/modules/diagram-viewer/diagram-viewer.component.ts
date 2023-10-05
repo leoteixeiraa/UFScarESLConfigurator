@@ -59,6 +59,8 @@ export class DiagramViewerComponent implements AfterViewInit, OnDestroy, OnInit 
         console.log(this.diagramWeb);
         if (this.shouldRenderDiagramWeb()) {
           this.renderMermaidDiagram(this.diagramWeb, 'diagramWebMarkup');
+        } else {
+          this.diagramWebMarkup = '';
         }
         this.cdr.detectChanges();
       });
@@ -71,6 +73,8 @@ export class DiagramViewerComponent implements AfterViewInit, OnDestroy, OnInit 
         console.log(this.diagramMobile);
         if (this.shouldRenderDiagramMobile()) {
           this.renderMermaidDiagram(this.diagramMobile, 'diagramMobileMarkup');
+        } else {
+          this.diagramMobileMarkup = '';
         }
         this.cdr.detectChanges();
       });
@@ -90,11 +94,11 @@ export class DiagramViewerComponent implements AfterViewInit, OnDestroy, OnInit 
 
   private shouldRenderDiagramWeb(): boolean {
     // Checa se o diagramWeb contém mais do que apenas a classe padrão mobilePlatform
-    return (this.diagramWeb.match(/class/g) || []).length > 2;
+    return (this.diagramWeb.match(/class/g) || []).length > 2 && this.diagramWeb.length > 35;
   }
   private shouldRenderDiagramMobile(): boolean {
     // Checa se o diagramMobile contém mais do que apenas a classe padrão mobilePlatform
-    return (this.diagramMobile.match(/class/g) || []).length > 2;
+    return (this.diagramMobile.match(/class/g) || []).length > 2 && this.diagramMobile.length > 38;
   }
 
   onTabChanged(): void {
