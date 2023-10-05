@@ -11,10 +11,10 @@
 
   <mat-tab-group (selectedTabChange)="onTabChanged()" class="mermaidClass">
     <mat-tab label="WebPlataform" >
-      <div id="diagramaClassWeb" *ngIf="hasContent(diagramWeb)"></div>
+      <div [innerHTML]="diagramWebMarkup" *ngIf="hasContent(diagramWeb)"></div>
     </mat-tab>
     <mat-tab label="MobileApp">
-      <div id="diagramaClassMobile" *ngIf="hasContent(diagramMobile)"></div>
+      <div [innerHTML]="diagramMobileMarkup" *ngIf="hasContent(diagramMobile)"></div>
     </mat-tab>
   </mat-tab-group>
 </section>

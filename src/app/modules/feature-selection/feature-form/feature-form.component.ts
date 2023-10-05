@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Feature } from 'src/app/core/modules/models/features.model';
 import { FeaturesService } from 'src/app/core/services/features.service';
 import { SharedDataService } from 'src/app/core/services/shared-data.service';
+import { DialogComponent } from 'src/app/shared/components/dialog/dialog/dialog.component';
 
 
 @Component({
@@ -13,32 +15,48 @@ import { SharedDataService } from 'src/app/core/services/shared-data.service';
 export class FeatureFormComponent implements OnInit {
   featureForm: FormGroup = new FormGroup({});
   features: Feature[] = [];
+  isActive = false;
+
+  icons = [
+    {
+      fontIcon: 'computer',
+      label: 'Example computer icon',
+      message: 'This icon represents the features for the web system.'
+    },
+    {
+      fontIcon: 'add_to_home_screen',
+      label: 'Example mobile icon',
+      message: 'This icon represents the features for the mobile application.'
+    },
+  ];
+  
 
   constructor(
     private fb: FormBuilder,
     private featuresService: FeaturesService,
-    private sharedDataService: SharedDataService
+    private sharedDataService: SharedDataService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
     this.initForm();
   }
 
-    // Determina se uma questão específica deve ser exibida com base em suas dependências e condições
-    shouldDisplayQuestion(feature: Feature): boolean {
-      if (!feature.dependsOn) return true;
+  // Determina se uma questão específica deve ser exibida com base em suas dependências e condições
+  shouldDisplayQuestion(feature: Feature): boolean {
+    if (!feature.dependsOn) return true;
 
-      const dependsOnValue = this.featureForm.get(feature.dependsOn)?.value;
-      if (!dependsOnValue) return false;
+    const dependsOnValue = this.featureForm.get(feature.dependsOn)?.value;
+    if (!dependsOnValue) return false;
 
-      if (this.isArray(dependsOnValue)) {
-        return dependsOnValue.some((value: any) => feature.condition?.includes(value));
-
-      }
-
-      return feature.condition?.includes(dependsOnValue) ?? false;
+    if (this.isArray(dependsOnValue)) {
+      return dependsOnValue.some((value: any) => feature.condition?.includes(value));
 
     }
+
+    return feature.condition?.includes(dependsOnValue) ?? false;
+
+  }
   // Inicializa o formulário com os controles necessários
   private initForm(): void {
     this.features = this.featuresService.getFeatures();
@@ -177,4 +195,30 @@ export class FeatureFormComponent implements OnInit {
       // Atualiza estado quando nenhuma opção estiver selecionada
     }
   }
+
+
+
+  toggleNavigation() {
+    this.isActive = !this.isActive;
+  }
+
+  openDialog(event: Event) {
+    // Para evitar a propagação do evento quando o usuário clica em um ícone, que poderia, por exemplo, acionar outro evento de clique no elemento pai.
+    event.stopPropagation();
+
+    // Obter a mensagem do atributo 'data-message' do elemento clicado.
+    const message = (event.target as HTMLElement).closest('[data-message]')?.getAttribute('data-message');
+
+    // Se houver uma mensagem, abra o diálogo. Se não houver uma mensagem, nada acontece.
+    if (message) {
+        this.dialog.open(DialogComponent, {
+            data: {
+                title: 'Icon Description',
+                message: message
+            }
+        });
+    }
 }
+}
+
+
