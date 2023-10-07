@@ -46,8 +46,8 @@ export class FeaturesService {
     },
     
     {
-      key: 'tipoPlatforma',
-      label: 'Select the type of Mobile Platform: Android or iOS?',
+      key: 'plataform_type',
+      label: 'Which is the Operating System of the mobile phones you are going to use in the operation?',
       dependsOn: 'platform',
       condition: ['mobile'],
       alternative: false,
