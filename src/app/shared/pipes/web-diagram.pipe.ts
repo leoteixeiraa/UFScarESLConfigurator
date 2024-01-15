@@ -9,12 +9,12 @@ export class WebDiagramPipe implements PipeTransform {
     let diagram = 'classDiagram\n';
     let relations = ''; // String separada para acumular as relações entre as classes
 
-    diagram += `class WebPlatform {\n`;
+    diagram += `class Web Application {\n`;
 
     // Lista de chaves recebidas da API
     const receivedKeys = Object.keys(data);
 
-    // Adicionando classes ao WebPlatform com base nas chaves recebidas
+    // Adicionando classes ao Web Application com base nas chaves recebidas
     for (const key of receivedKeys) {
       if (data.hasOwnProperty(key)) {
         diagram += `  +List ${key}\n`;
@@ -37,7 +37,7 @@ export class WebDiagramPipe implements PipeTransform {
         diagram += '}\n';
 
         // Adicionando a relação na string separada
-        relations += `WebPlatform "1" ..> "1" ${this.capitalizeFirstLetter(key)}\n`;
+        relations += `Web Application "1" ..> "1" ${this.capitalizeFirstLetter(key)}\n`;
       }
     }
 
