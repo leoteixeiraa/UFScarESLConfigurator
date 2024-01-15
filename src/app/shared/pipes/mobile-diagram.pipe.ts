@@ -9,12 +9,12 @@ export class MobileDiagramPipe implements PipeTransform {
     let diagram = 'classDiagram\n';
     let relations = ''; // String separada para acumular as relações entre as classes
 
-    diagram += `class MobilePlatform {\n`;
+    diagram += `class ESL Installation Device {\n`;
 
     // Lista de chaves recebidas da API
     const receivedKeys = Object.keys(data);
 
-    // Adicionando classes ao MobilePlatform com base nas chaves recebidas
+    // Adicionando classes ao ESL Installation Device com base nas chaves recebidas
     for (const key of receivedKeys) {
       if (data.hasOwnProperty(key)) {
         diagram += `  +List ${key}\n`;
@@ -37,7 +37,7 @@ export class MobileDiagramPipe implements PipeTransform {
         diagram += '}\n';
 
         // Adicionando a relação na string separada
-        relations += `MobilePlatform "1" ..> "1" ${this.capitalizeFirstLetter(key)}\n`;
+        relations += `ESL Installation Device "1" ..> "1" ${this.capitalizeFirstLetter(key)}\n`;
       }
     }
 

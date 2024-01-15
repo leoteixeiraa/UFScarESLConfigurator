@@ -9,70 +9,68 @@ export class FeaturesService {
   private features: Feature[] = [
     {
       key: 'platform',
-      label: 'Which application you want starting choosing the features ? For the mobile app or web app ?',
+      label: 'Select the ESL solution component to configure:',
       alternative: false,
       featureMain: true,
       options: [
-        { value: 'mobile', display: 'Mobile' },
-        { value: 'web', display: 'Web' }
+        { value: 'mobile', display: 'ESL Installation Device' },
+        { value: 'web', display: 'Web Application' },
+        { value: 'esl', display: 'ESL' },
       ]
     },
     {
-      key: 'stock_management',
-      label: 'Select Your Preferred Stock Management Feature for the Web App:',
+      key: 'mobileAppFunctionalities',
+      label: 'Select functionalities for the mobile ESL application:',
       dependsOn: 'platform',
       condition: ['web'],
       featureMain: false,
       alternative: false,
       featureValue: ['web'],
       options: [
+        { value: 'commission_decommission', display: 'Commission/Decommission' },
+        { value: 'view_product_info', display: 'Viewing Product Information' },
         { 
-          value: 'inventory_tracking',
-          display: 'Inventory Tracking: Real-time tracking of stock levels and movement.'
+          value: 'search_product',
+          display: 'Search Product.'
         },
         { 
-          value: 'restocking_alerts',
-          display: 'Restocking Alerts: Receive alerts when stock levels fall below a defined threshold.'
+          value: 'display_esl_information',
+          display: 'Display ESL Information.'
         },
-        { 
-          value: 'stock_analysis',
-          display: 'Stock Analysis: Analyze stock data for inventory optimization and reduced holding costs.'
-        },
-        { 
-          value: 'order_management',
-          display: 'Order Management: Manage purchase orders, suppliers, and incoming stock effectively.'
-        }
+
       ]
     },
-    
     {
-      key: 'plataform_type',
-      label: 'Which is the Operating System of the mobile phones you are going to use in the operation?',
+      key: 'deviceType',
+      label: 'Select the device type for ESL Installation Device:',
       dependsOn: 'platform',
       condition: ['mobile'],
-      alternative: false,
+      alternative: true,
       featureMain: false,
       featureValue: ['mobile'],
       options: [
-        { value: 'android', display: 'Android' },
-        { value: 'ios', display: 'IOS' },
+        { value: 'mobile_phone', display: 'Mobile Phone' },
+        { value: 'dedicated_device', display: 'Dedicated Device' }
       ]
     },
     {
-      key: 'eslOperations',
-      label: 'Does your app require to perform ESL operations like commissioning and decommissioning?',
+      key: 'webAppFunctionalities',
+      label: 'Select the type of ESL display technology:',
       dependsOn: 'platform',
-      condition: ['mobile'],
+      condition: ['esl'],
       alternative: false,
       featureMain: false,
-      featureValue: ['mobile'],
+      featureValue: ['esl'],
       options: [
-        { value: 'commissioning', display: 'ESL Commissioning' },
-        { value: 'decommissioning', display: 'ESL Decommissioning' }
+        { value: 'lcd', display: 'LCD' },
+        { value: 'e_paper', display: 'E-Paper' },
+        { value: 'led', display: 'LED' },
+        { value: 'oled', display: 'OLED' },
+        { value: 'tft', display: 'TFT' }
       ]
     },
     {
-      key: 'eslPermissions',
+      key: 'eslFeatures',
       label: 'Does the app need to manage different user permissions for ESL operations?',
       dependsOn: 'platform',
       condition: ['mobile'],
@@ -80,7 +78,7 @@ export class FeaturesService {
       featureMain: false,
       featureValue: ['mobile'],
       options: [
-        { value: 'manageEslPermissions', display: 'Manage ESL Permissions' }
+        { value: 'manageEslPermissions', display: 'Authenticating mobile User' }
       ]
     },
     {
@@ -96,15 +94,16 @@ export class FeaturesService {
       ]
     },
     {
-      key: 'eslStatusCheck',
-      label: 'Do users need to check the status of ESL devices remotely?',
-      dependsOn: 'platform',
-      condition: ['web', 'mobile'],
-      alternative: false,
+      key: 'typeAuth',
+      label: 'Select the type of authentication: Two-Factor or Biometric?',
+      dependsOn: 'sessionManagement',
+      condition: ['userSessionManagement'],
+      alternative: true,
       featureMain: false,
       featureValue: ['web', 'mobile'],
       options: [
-        { value: 'eslStatusView', display: 'ESL Status View' }
+        { value: 'two_factors', display: 'Two Factors' },
+        { value: 'biometric', display: 'Biometric' },
       ]
     },
     {
@@ -114,7 +113,21 @@ export class FeaturesService {
       condition: ['web', 'mobile'],
       alternative: false,
       featureMain: false,
-      featureValue: ['web', 'mobile'],
+      featureValue: ['web', 'mobile', 'esl'],
+      options: [
+        { value: 'local', display: 'Local' },
+        { value: 'cloud', display: 'Cloud' },
+        { value: 'hybrid', display: 'Hybrid' },
+      ]
+    },
+    {
+      key: 'infrastructure2',
+      label: 'Choose the type of infrastructure for your application: Local, Cloud, or Hybrid?',
+      dependsOn: 'platform',
+      condition: ['esl'],
+      alternative: false,
+      featureMain: false,
+      featureValue: ['esl'],
       options: [
         { value: 'local', display: 'Local' },
         { value: 'cloud', display: 'Cloud' },
@@ -128,7 +141,20 @@ export class FeaturesService {
       condition: ['cloud'],
       alternative: true,
       featureMain: false,
-      featureValue: ['web', 'mobile'],
+      featureValue: ['web', 'mobile', 'esl'],
+      options: [
+        { value: 'public', display: 'Public' },
+        { value: 'private', display: 'Private' },
+      ]
+    },
+    {
+      key: 'typeCloud2',
+      label: 'Select the type of Cloud environment: Public or Private?',
+      dependsOn: 'infrastructure2',
+      condition: ['cloud'],
+      alternative: true,
+      featureMain: false,
+      featureValue: ['esl'],
       options: [
         { value: 'public', display: 'Public' },
         { value: 'private', display: 'Private' },
@@ -509,9 +535,6 @@ export class FeaturesService {
         { value: 'error_report', display: 'Error Report: Identify and resolve issues related to pricing errors or miscommunications.' }
       ]
     }
-
-
-
 
 
   ];
