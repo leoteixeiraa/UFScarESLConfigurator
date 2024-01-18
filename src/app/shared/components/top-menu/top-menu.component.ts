@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import packageInfo from '../../../../../package.json';
 
 @Component({
   selector: 'app-top-menu',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./top-menu.component.sass']
 })
 export class TopMenuComponent {
-
+  version = packageInfo.version;
 }

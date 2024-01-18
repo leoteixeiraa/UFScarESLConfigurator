@@ -2,20 +2,20 @@
   <div class="container text-center mt-5">
     <h2>Feature Diagram Presentation</h2>
     <p>
-      At this stage, visual diagrams are generated to illustrate the integration 
-      of selected features into the overall ESL system. These diagrams provide 
-      a clear depiction of the user's choices, offering a comprehensive 
-      blueprint for the development of the ESL solution.
+      In this phase, the system generates visual diagrams that display the integration 
+      of chosen features into the ESL system. These diagrams visually represent 
+      the selections made by the user, aiding in the development process of 
+      the ESL solution.
     </p>
     <br />
     <br />
   </div>
 
   <mat-tab-group (selectedTabChange)="onTabChanged()" class="mermaidClass">
-    <mat-tab label="WebPlataform" >
+    <mat-tab label="Web Application" >
       <div [innerHTML]="diagramWebMarkup" *ngIf="hasContent(diagramWeb)"></div>
     </mat-tab>
-    <mat-tab label="MobileApp">
+    <mat-tab label="ESL Installation Device">
       <div [innerHTML]="diagramMobileMarkup" *ngIf="hasContent(diagramMobile)"></div>
     </mat-tab>
   </mat-tab-group>

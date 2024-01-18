@@ -7,22 +7,32 @@
   z-index: 1000
   background-color: $color-azul-escuro
   padding: 10px 20px
-  display: flex  // garante que os itens dentro sejam tratados como itens flexíveis
-  align-items: center  // centraliza verticalmente os itens
+  display: flex
+  align-items: center
   margin-left: inherit
+  flex-wrap: wrap // Permite que os itens se ajustem conforme necessário
 
   .logo
     width: 191px
     height: 43px
     background-image: url('../../../../assets/img/logo-oficial.png')
     background-size: contain
-    background-position: center  // centraliza a imagem de fundo
+    background-position: center
     background-repeat: no-repeat
     margin-right: 20px
-    flex-shrink: 0  // impede que o logo encolha se a barra de ferramentas ficar muito pequena
+    flex-shrink: 0
+
+  .versaoFonte
+    order: 2
+    align-self: flex-start
+    margin-top: 13px
+    font-size: 0.6em
+    // color: $cor-da-fonte // substitua pela cor desejada
+    text-align: left
+    margin-left: -1%
 
   button
-    // margin-left: auto  // alinha o botão à direita. Se você não quer isso, remova ou ajuste
+    // margem e outras propriedades, se necessário
 
 .mat-menu
   color: $color-azul-escuro
