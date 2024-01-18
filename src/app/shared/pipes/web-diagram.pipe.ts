@@ -17,7 +17,7 @@ export class WebDiagramPipe implements PipeTransform {
     // Adicionando classes ao Web Application com base nas chaves recebidas
     for (const key of receivedKeys) {
       if (data.hasOwnProperty(key)) {
-        diagram += `  +List ${key}\n`;
+        diagram += `   \n`;
       }
     }
 
@@ -31,9 +31,7 @@ export class WebDiagramPipe implements PipeTransform {
         const featureMain = data[key].featureMain;
 
         diagram += `class ${this.capitalizeFirstLetter(key)} {\n`;
-        diagram += `  +List features : "${values}"\n`;
-        diagram += `  +Boolean feature alternative : ${alternative}\n`;
-        diagram += `  +Boolean featureMain : ${featureMain}\n`;
+        diagram += `  +List features selected: "${values}"\n`;
         diagram += '}\n';
 
         // Adicionando a relação na string separada
